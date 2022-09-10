@@ -172,3 +172,6 @@ rustc-args = ["--cfg", "tokio_unstable"]
 
 [package.metadata.playground]
 features = ["full", "test-util"]
+
+[patch.crates-io]
+mio = { git = 'https://github.com/Thomasdezeeuw/mio.git', branch = 'issue#1582_named_pipe_set_buffer_size' }

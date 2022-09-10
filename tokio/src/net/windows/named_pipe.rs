@@ -958,7 +958,9 @@ impl NamedPipeClient {
     /// [Tokio Runtime]: crate::runtime::Runtime
     /// [enabled I/O]: crate::runtime::Builder::enable_io
     pub unsafe fn from_raw_handle(handle: RawHandle) -> io::Result<Self> {
-        let named_pipe = mio_windows::NamedPipe::from_raw_handle(handle);
+        let mut named_pipe = mio_windows::NamedPipe::from_raw_handle(handle);
+
+        named_pipe.set_buffer_size(1);
 
         Ok(Self {
             io: PollEvented::new(named_pipe)?,
